@@ -1,0 +1,44 @@
+# Deployment for App B
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: 12factor-app-b-deployment
+spec:
+  selector:
+    matchLabels:
+      app: 12factor-app-b
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: 12factor-app-b
+    spec:
+      containers:
+        - name: 12factor-app-b
+          image: quarkus-service-b:1.0
+          ports:
+            - containerPort: 8080
+            - containerPort: 9443
+
+---
+
+# Service for App B
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: factor-app-b-service
+spec:
+  ports:
+    - name: http
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: https
+      port: 9443
+      protocol: TCP
+      targetPort: 9443
+  selector:
+    app: 12factor-app-b
+  type: ClusterIP
