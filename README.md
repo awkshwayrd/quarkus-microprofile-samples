@@ -75,6 +75,19 @@ kubectl get svc
 
 Go http://localhost:30080/data/hello
 
+##### More configuration
+
+Injected extra value
+
+```
+➜ service-a> kubectl delete -f deployment.yml
+➜ service-a> mvn clean install liberty:dev
+```
+
+```
+➜ service-b> kubectl delete -f deployment.yml
+```
+
 
 
 
