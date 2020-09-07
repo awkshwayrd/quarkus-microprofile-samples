@@ -1,5 +1,9 @@
 package com.microprofile.liberty.client;
 
+import org.eclipse.microprofile.faulttolerance.Asynchronous;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Retry;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -7,6 +11,8 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 @Path("/client")
 @ApplicationScoped
@@ -18,7 +24,15 @@ public class ClientController {
 
     @GET
     @Path("/test/{parameter}")
-    public String onClientSide(@PathParam("parameter") String parameter) {
-        return service.doSomething(parameter);
+    @Retry
+    @Timeout(100)
+    @Asynchronous
+    @Fallback(fallbackMethod = "fallback")
+    public CompletionStage<String> onClientSide(@PathParam("parameter") String parameter) {
+        return CompletableFuture.completedFuture(service.doSomething(parameter));
+    }
+
+    private CompletionStage<String> fallback(@PathParam("parameter") String parameter) {
+        return CompletableFuture.completedFuture("This is fallback!!");
     }
 }

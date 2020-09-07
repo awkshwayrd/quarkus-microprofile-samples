@@ -84,11 +84,20 @@ Injected extra value
 ➜ service-a> mvn clean install liberty:dev
 ```
 
+Go http://localhost:9080/data/hello
+
 ```
 ➜ service-b> kubectl delete -f deployment.yml
 ```
 
+##### Inject fault and delay into Service B, fault tolerance into Service A
 
+```
+➜ service-a> mvn clean install liberty:dev
+➜ service-b> mvn compile quarkus:dev
+```
+
+Go http://localhost:9080/data/client/test/Value
 
 
 
