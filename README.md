@@ -6,7 +6,7 @@ Code walktthrough from the talk [Live Coding 12-Factor App](https://www.youtube.
 
 ###### Bootstrap services in liberty and quarkus dirs
 
-Generate skeletons from [](start.microprofile.io)
+Generate skeletons from [start.microprofile.io]
 
 In **liberty** dir -> MP 3.2/Java 8/OpenLiberty/All options
 
