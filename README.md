@@ -1,5 +1,8 @@
 # Microprofile and Quarkus samples
 
+
+Enterprise Coffee: https://github.com/sdaschner/modern-java-enterprise/tree/quarkus-runtime
+
 ### 1. Quarkus and OpenLiberty services
 
 Code walktthrough from the talk [Live Coding 12-Factor App](https://www.youtube.com/watch?v=6dLVPFNLboo) by Emily Jiang. Original code can be found https://github.com/Emily-Jiang/qcon-12factor-app-a and https://github.com/Emily-Jiang/qcon-12factor-app-b. The version in this repo was generated and modified by following alogn with the video.
